@@ -2,12 +2,11 @@ package com.example.adventurefall22.entity;
 
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.sql.Time;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -32,9 +31,17 @@ public class Reservation {
 
     private int numberOfParticipants;
 
+    @OneToMany(mappedBy = "reservation", cascade = CascadeType.ALL)
+    private List<Activity> activityList = new ArrayList<>();
+
     private LocalDate date;
 
     private Time time;
+
+    public void addActivity(Activity activity){
+        activityList.add(activity);
+        activity.setReservation(this);
+    }
 
     public Reservation(String name, String email, int phoneNumber, int age, int numberOfParticipants, LocalDate date, Time time) {
         this.name = name;
