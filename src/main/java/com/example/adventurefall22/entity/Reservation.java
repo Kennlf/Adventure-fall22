@@ -35,14 +35,14 @@ public class Reservation {
     private int numberOfParticipants;
 
     @OneToMany(mappedBy = "reservation", cascade = CascadeType.ALL)
-    private List<Activity> activityList = new ArrayList<>();
+    private List<Activity> activities = new ArrayList<>();
 
     private LocalDate date;
 
     private Time time;
 
     public void addActivity(Activity activity){
-        activityList.add(activity);
+        activities.add(activity);
         activity.setReservation(this);
     }
 

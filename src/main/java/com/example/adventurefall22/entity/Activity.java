@@ -22,12 +22,18 @@ public class Activity {
     private String name;
 
     private int ageLimit;
-
+    private int maxParticipant;
+    private int price;
 
     @ManyToOne
     private Reservation reservation;
 
 
-
-
+    public Activity(int id, String name, int price, int maxParticipant,int ageLimit) {
+        this.id = id;
+        this.name = name;
+        this.price = price;
+        this.maxParticipant = maxParticipant;
+        this.ageLimit = ageLimit;
+    }
 }
