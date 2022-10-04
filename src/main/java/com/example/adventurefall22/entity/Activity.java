@@ -23,16 +23,10 @@ public class Activity {
 
     private int ageLimit;
 
-    @OneToMany(mappedBy = "activity", cascade = CascadeType.ALL)
-    private List<Equipment> equipmentList = new ArrayList<>();
 
     @ManyToOne
     private Reservation reservation;
 
-    public void addEquipment(Equipment equipment){
-        equipmentList.add(equipment);
-        equipment.setActivity(this);
-    }
 
 
 

@@ -19,7 +19,7 @@ import java.util.List;
 @NoArgsConstructor
 public class ReservationRequest {
 
-    private String name;
+    private String contactName;
 
     private String email;
 
@@ -36,17 +36,23 @@ public class ReservationRequest {
 
     private Time time;
 
+    private String companyName;
+    private int cvr;
+
     public static Reservation getReservationEntity(ReservationRequest rr){
-        return new Reservation(rr.name, rr.email, rr.phoneNumber, rr.age, rr.numberOfParticipants, rr.date, rr.time);
+        return new Reservation(rr.contactName, rr.email, rr.phoneNumber, rr.age,
+                rr.numberOfParticipants, rr.date, rr.time, rr.companyName,rr.cvr);
     }
 
     public ReservationRequest(Reservation reservation) {
-        this.name = reservation.getName();
+        this.contactName = reservation.getContactName();
         this.email = reservation.getEmail();
         this.phoneNumber = reservation.getPhoneNumber();
         this.age = reservation.getAge();
         this.numberOfParticipants = reservation.getNumberOfParticipants();
         this.date = reservation.getDate();
         this.time = reservation.getTime();
+        this.companyName = reservation.getCompanyName();
+        this.cvr = reservation.getCvr();
     }
 }

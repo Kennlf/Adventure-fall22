@@ -21,13 +21,16 @@ public class Reservation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    private String name;
+    private String contactName;
 
     private String email;
 
     private int phoneNumber;
 
     private int age;
+
+    private String companyName;
+    private int cvr;
 
     private int numberOfParticipants;
 
@@ -43,13 +46,15 @@ public class Reservation {
         activity.setReservation(this);
     }
 
-    public Reservation(String name, String email, int phoneNumber, int age, int numberOfParticipants, LocalDate date, Time time) {
-        this.name = name;
+    public Reservation(String contactName, String email, int phoneNumber, int age, int numberOfParticipants, LocalDate date, Time time, String companyName, int cvr) {
+        this.contactName = contactName;
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.age = age;
         this.numberOfParticipants = numberOfParticipants;
         this.date = date;
         this.time = time;
+        this.companyName = companyName;
+        this.cvr = cvr;
     }
 }

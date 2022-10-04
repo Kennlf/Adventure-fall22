@@ -25,10 +25,17 @@ public class ReservationResponse {
 
     private Time time;
 
-    public ReservationResponse(Reservation reservation) {
+    private String companyName;
+    private int cvr;
+
+    public ReservationResponse(Reservation reservation, Boolean includeAll) {
         this.id = reservation.getId();
-        this.name = reservation.getName();
+        this.name = reservation.getContactName();
         this.date = reservation.getDate();
         this.time = reservation.getTime();
+        if (includeAll){
+            this.cvr = reservation.getCvr();
+            this.companyName = reservation.getCompanyName();
+        }
     }
 }
