@@ -39,21 +39,21 @@ public class Reservation {
 
     private LocalDate date;
 
-    private Time time;
+    //private Time time;
 
     public void addActivity(Activity activity){
         activities.add(activity);
         activity.setReservation(this);
     }
 
-    public Reservation(String contactName, String email, int phoneNumber, int age, int numberOfParticipants, LocalDate date, Time time, String companyName, int cvr) {
+    public Reservation(String contactName, String email, int phoneNumber, int age, int numberOfParticipants, LocalDate date, String companyName, int cvr) {
         this.contactName = contactName;
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.age = age;
         this.numberOfParticipants = numberOfParticipants;
         this.date = date;
-        this.time = time;
+        //this.time = time;
         this.companyName = companyName;
         this.cvr = cvr;
     }

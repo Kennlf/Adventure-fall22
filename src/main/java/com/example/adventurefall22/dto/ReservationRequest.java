@@ -41,7 +41,7 @@ public class ReservationRequest {
 
     public static Reservation getReservationEntity(ReservationRequest rr){
         return new Reservation(rr.contactName, rr.email, rr.phoneNumber, rr.age,
-                rr.numberOfParticipants, rr.date, rr.time, rr.companyName,rr.cvr);
+                rr.numberOfParticipants, rr.date, rr.companyName,rr.cvr);
     }
 
     public ReservationRequest(Reservation reservation) {
@@ -51,7 +51,7 @@ public class ReservationRequest {
         this.age = reservation.getAge();
         this.numberOfParticipants = reservation.getNumberOfParticipants();
         this.date = reservation.getDate();
-        this.time = reservation.getTime();
+        //this.time = reservation.getTime();
         this.companyName = reservation.getCompanyName();
         this.cvr = reservation.getCvr();
     }

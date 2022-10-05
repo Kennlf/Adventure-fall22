@@ -1,6 +1,5 @@
 package com.example.adventurefall22.dto;
 
-import com.example.adventurefall22.entity.Activity;
 import com.example.adventurefall22.entity.Reservation;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -21,7 +20,7 @@ public class ReservationResponse {
 
     private int id;
 
-    private String name;
+    private String contactName;
 
     @JsonFormat(pattern = "dd-MM-yyyy", shape = JsonFormat.Shape.STRING)
     private LocalDate date;
@@ -34,9 +33,10 @@ public class ReservationResponse {
 
     public ReservationResponse(Reservation reservation, Boolean includeAll) {
         this.id = reservation.getId();
-        this.name = reservation.getContactName();
+        this.contactName = reservation.getContactName();
         this.date = reservation.getDate();
-        this.time = reservation.getTime();
+        //this.time = reservation.getTime();
+        //number of participants
         if (includeAll){
             this.cvr = reservation.getCvr();
             this.companyName = reservation.getCompanyName();
