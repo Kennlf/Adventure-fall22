@@ -3,7 +3,9 @@ package com.example.adventurefall22.service;
 import com.example.adventurefall22.dto.ReservationResponse;
 import com.example.adventurefall22.entity.Reservation;
 import com.example.adventurefall22.repository.ReservationRepository;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -22,5 +24,10 @@ public class ReservationService {
         List<ReservationResponse> response = reservations.stream().map(res ->
                 new ReservationResponse(res, include)).collect(Collectors.toList());
         return response;
+    }
+
+    public ReservationResponse findReservationById(int id) {
+        Reservation found = reservationRepository.findById(id).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND,"Car not found"));
+        return new ReservationResponse(found,false);
     }
 }

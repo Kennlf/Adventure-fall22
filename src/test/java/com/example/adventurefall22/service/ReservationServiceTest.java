@@ -47,4 +47,11 @@ class ReservationServiceTest {
         assertEquals(2, responses.size());
         assertThat(responses, containsInAnyOrder(hasProperty("contactName", is("John doe")), hasProperty("contactName", is("AA"))));
     }
+
+
+    @Test
+    void findReservationById() {
+        ReservationResponse response = reservationService.findReservationById(1);
+        assertEquals(1,response.getId());
+    }
 }
