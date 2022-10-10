@@ -15,15 +15,17 @@ import java.time.LocalTime;
 public class Setup implements ApplicationRunner {
 
     ReservationRepository reservationRepository;
+    ReservationService reservationService;
 
-    public Setup(ReservationRepository reservationRepository) {
+    public Setup(ReservationRepository reservationRepository, ReservationService reservationService) {
         this.reservationRepository = reservationRepository;
+        this.reservationService = reservationService;
     }
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
         Reservation reservation = new Reservation("John doe", "John@john.dk"
-                ,88888888,15,10,LocalDate.of(2022, 10,10),null,1234567);
+                ,88888888,15,LocalDate.of(2022, 10,10),null,1234567);
 
         reservationRepository.save(reservation);
     }

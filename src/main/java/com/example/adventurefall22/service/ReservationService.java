@@ -1,6 +1,6 @@
 package com.example.adventurefall22.service;
 
-import com.example.adventurefall22.dto.ReservationResponse;
+import com.example.adventurefall22.dto.CorporateReservationResponse;
 import com.example.adventurefall22.entity.Reservation;
 import com.example.adventurefall22.repository.ReservationRepository;
 import org.springframework.http.HttpStatus;
@@ -19,15 +19,15 @@ public class ReservationService {
         this.reservationRepository = reservationRepository;
     }
 
-    public List<ReservationResponse> getAllReservations(boolean include) {
+    public List<CorporateReservationResponse> getAllReservations() {
         List<Reservation> reservations = reservationRepository.findAll();
-        List<ReservationResponse> response = reservations.stream().map(res ->
-                new ReservationResponse(res, include)).collect(Collectors.toList());
+        List<CorporateReservationResponse> response = reservations.stream().map(res ->
+                new CorporateReservationResponse(res)).collect(Collectors.toList());
         return response;
     }
 
-    public ReservationResponse findReservationById(int id) {
-        Reservation found = reservationRepository.findById(id).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND,"Car not found"));
-        return new ReservationResponse(found,false);
+    public CorporateReservationResponse findReservationById(int id) {
+        Reservation found = reservationRepository.findById(id).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND,"Reservation not found"));
+        return new CorporateReservationResponse(found);
     }
 }

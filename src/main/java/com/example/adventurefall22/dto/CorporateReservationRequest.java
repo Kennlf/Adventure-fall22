@@ -7,17 +7,15 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.OneToMany;
 import java.sql.Time;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class ReservationRequest {
+public class CorporateReservationRequest {
 
     private String contactName;
 
@@ -27,31 +25,24 @@ public class ReservationRequest {
 
     private int age;
 
-    private int numberOfParticipants;
-
-
     private List<Activity> activityList;
 
     private LocalDate date;
 
-    private Time time;
-
     private String companyName;
+
     private int cvr;
 
-    public static Reservation getReservationEntity(ReservationRequest rr){
-        return new Reservation(rr.contactName, rr.email, rr.phoneNumber, rr.age,
-                rr.numberOfParticipants, rr.date, rr.companyName,rr.cvr);
+    public static Reservation getReservationEntity(CorporateReservationRequest rr){
+        return new Reservation(rr.contactName, rr.email, rr.phoneNumber, rr.age, rr.date, rr.companyName,rr.cvr);
     }
 
-    public ReservationRequest(Reservation reservation) {
+    public CorporateReservationRequest(Reservation reservation) {
         this.contactName = reservation.getContactName();
         this.email = reservation.getEmail();
         this.phoneNumber = reservation.getPhoneNumber();
         this.age = reservation.getAge();
-        this.numberOfParticipants = reservation.getNumberOfParticipants();
         this.date = reservation.getDate();
-        //this.time = reservation.getTime();
         this.companyName = reservation.getCompanyName();
         this.cvr = reservation.getCvr();
     }

@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 @NoArgsConstructor
 @Builder
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class ReservationResponse {
+public class CorporateReservationResponse {
 
     private int id;
 
@@ -25,22 +25,18 @@ public class ReservationResponse {
     @JsonFormat(pattern = "dd-MM-yyyy", shape = JsonFormat.Shape.STRING)
     private LocalDate date;
 
-    private Time time;
     private String companyName;
+
     private int cvr;
 
     List<ActivityResponse> activities;
 
-    public ReservationResponse(Reservation reservation, Boolean includeAll) {
+    public CorporateReservationResponse(Reservation reservation) {
         this.id = reservation.getId();
         this.contactName = reservation.getContactName();
         this.date = reservation.getDate();
-        //this.time = reservation.getTime();
-        //number of participants
-        if (includeAll){
-            this.cvr = reservation.getCvr();
-            this.companyName = reservation.getCompanyName();
-        }
+        this.cvr = reservation.getCvr();
+        this.companyName = reservation.getCompanyName();
 
         if(reservation.getActivities().size() > 0){
             activities = reservation.getActivities().stream().map(a-> ActivityResponse.builder()

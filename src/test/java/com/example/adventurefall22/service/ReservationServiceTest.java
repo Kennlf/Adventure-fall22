@@ -1,6 +1,6 @@
 package com.example.adventurefall22.service;
 
-import com.example.adventurefall22.dto.ReservationResponse;
+import com.example.adventurefall22.dto.CorporateReservationResponse;
 import com.example.adventurefall22.entity.Reservation;
 import com.example.adventurefall22.repository.ReservationRepository;
 import org.junit.jupiter.api.BeforeAll;
@@ -29,8 +29,8 @@ class ReservationServiceTest {
     public static void setupData(@Autowired ReservationRepository reservation_Repository){
         reservationRepository = reservation_Repository;
         List<Reservation> reservations = List.of(
-                new Reservation("John doe", "John@john.dk",88888888,15,10, LocalDate.of(2022, 10,10),null,12345678),
-                new Reservation("AA", "A@A.dk",11111111,10,20, LocalDate.of(2022, 10,15),null,87654321)
+                new Reservation("John doe", "John@john.dk",88888888,15, LocalDate.of(2022, 10,10),null,12345678),
+                new Reservation("AA", "A@A.dk",11111111,10, LocalDate.of(2022, 10,15),null,87654321)
         );
         reservationRepository.saveAll(reservations);
 
@@ -43,7 +43,7 @@ class ReservationServiceTest {
 
     @Test
     void getAllReservations() {
-        List<ReservationResponse> responses = reservationService.getAllReservations(true);
+        List<CorporateReservationResponse> responses = reservationService.getAllReservations();
         assertEquals(2, responses.size());
         assertThat(responses, containsInAnyOrder(hasProperty("contactName", is("John doe")), hasProperty("contactName", is("AA"))));
     }
@@ -51,7 +51,7 @@ class ReservationServiceTest {
 
     @Test
     void findReservationById() {
-        ReservationResponse response = reservationService.findReservationById(1);
+        CorporateReservationResponse response = reservationService.findReservationById(1);
         assertEquals(1,response.getId());
     }
 }
