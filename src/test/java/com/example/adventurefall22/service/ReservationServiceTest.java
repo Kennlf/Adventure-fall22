@@ -54,4 +54,9 @@ class ReservationServiceTest {
         CorporateReservationResponse response = reservationService.findReservationById(1);
         assertEquals(1,response.getId());
     }
+    @Test
+    void deleteByReservationId() {
+        reservationRepository.deleteById(1);
+        assertEquals(1,reservationRepository.count());
+    }
 }

@@ -30,4 +30,8 @@ public class ReservationService {
         Reservation found = reservationRepository.findById(id).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND,"Reservation not found"));
         return new CorporateReservationResponse(found);
     }
+
+    public void deleteReservation(int id) {
+        reservationRepository.deleteById(id);
+    }
 }

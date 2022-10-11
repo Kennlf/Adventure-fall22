@@ -29,4 +29,9 @@ public class ReservationController {
     CorporateReservationResponse getReservationByPhoneNumber(@PathVariable int id) throws Exception {
         return reservationService.findReservationById(id);
     }
+
+    @DeleteMapping("/{id}")
+    public void deleteReservation(@PathVariable int id){
+        reservationService.deleteReservation(id);
+    }
 }
