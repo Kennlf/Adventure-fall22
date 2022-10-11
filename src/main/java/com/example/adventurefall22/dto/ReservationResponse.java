@@ -23,10 +23,12 @@ public class ReservationResponse {
 
     private String contactName;
 
+    private String email;
+
+    private int phoneNumber;
+
     @JsonFormat(pattern = "dd-MM-yyyy", shape = JsonFormat.Shape.STRING)
     private LocalDate date;
-
-    private Time time;
 
     private String companyName;
     private int cvr;
@@ -40,6 +42,8 @@ public class ReservationResponse {
         if (includeAll) {
             this.cvr = reservation.getCvr();
             this.companyName = reservation.getCompanyName();
+            this.email = reservation.getEmail();
+            this.phoneNumber = reservation.getPhoneNumber();
         }
 
         if (reservation.getActivities().size() > 0) {

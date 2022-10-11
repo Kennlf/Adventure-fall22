@@ -25,27 +25,17 @@ public class ReservationRequest {
 
     private String contactName;
 
-
     private String email;
-
 
     private int phoneNumber;
 
-
     private int age;
-
 
     private int numberOfParticipants;
 
-
     private List<Activity> activityList;
 
-
     private LocalDate date;
-
-
-    private Time time;
-
 
     private String companyName;
     private int cvr;
@@ -55,7 +45,6 @@ public class ReservationRequest {
         return new Reservation(rr.contactName, rr.email, rr.phoneNumber, rr.age,
                  rr.date, rr.companyName, rr.cvr);
     }
-
 
     public ReservationRequest(Reservation reservation) {
         this.contactName = reservation.getContactName();
