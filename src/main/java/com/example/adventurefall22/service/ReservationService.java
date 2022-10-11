@@ -40,14 +40,6 @@ public class ReservationService {
     }
 
     public void reserveActivity(int id, LocalDate date, Reservation res) {
-        int id1, id2, id3, id4;
-        if(res.getActivities() != null) {
-            List<Activity> test = res.getActivities();
-            id1 = test.get(0).getId();
-            id2 = test.get(1).getId();
-            id3 = test.get(2).getId();
-            id4 = test.get(3).getId();
-        }
 
 
         if(activityRepository.existsByIdAndReservationDate(id, date)){

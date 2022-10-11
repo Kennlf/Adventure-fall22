@@ -24,9 +24,8 @@ public class Setup implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        Reservation reservation = new Reservation("John doe", "John@john.dk"
-                ,88888888,15,LocalDate.of(2022, 10,10),null,1234567);
+       // Reservation reservation = new Reservation("John doe", "John@john.dk",88888888,15,LocalDate.of(2022, 10,10),null,1234567);
 
-        reservationRepository.save(reservation);
+        //reservationRepository.save(reservation);
     }
 }

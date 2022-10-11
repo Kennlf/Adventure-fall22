@@ -1,6 +1,8 @@
 package com.example.adventurefall22.dto;
 
 import com.example.adventurefall22.dto.ActivityResponse;
+import com.example.adventurefall22.entity.Activity;
+import com.example.adventurefall22.entity.Customer;
 import com.example.adventurefall22.entity.Reservation;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -19,41 +21,35 @@ import java.util.stream.Collectors;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ReservationResponse {
 
-    private int id;
+    private int resId;
 
     private String contactName;
 
-    private String email;
+    private String activityName;
 
-    private int phoneNumber;
+    private String instructorName;
 
-    @JsonFormat(pattern = "dd-MM-yyyy", shape = JsonFormat.Shape.STRING)
     private LocalDate date;
 
-    private String companyName;
-    private int cvr;
+    private int numberOfParticipants;
 
-    List<ActivityResponse> activities;
+    private Activity activity;
+
+    private Customer customer;
+
+
 
     public ReservationResponse(Reservation reservation, Boolean includeAll) {
-        this.id = reservation.getId();
-        this.contactName = reservation.getContactName();
+        this.resId = reservation.getId();
+        this.contactName = customer.getName();
+        this.activityName = activity.getName();
+        this.instructorName = activity.getInstructorName();
         this.date = reservation.getDate();
-        if (includeAll) {
-            this.cvr = reservation.getCvr();
-            this.companyName = reservation.getCompanyName();
-            this.email = reservation.getEmail();
-            this.phoneNumber = reservation.getPhoneNumber();
-        }
+        this.numberOfParticipants = reservation.getNumberOfParticipants();
 
-        if (reservation.getActivities().size() > 0) {
-            activities = reservation.getActivities().stream().map(a -> ActivityResponse.builder()
-                    .id(a.getId())
-                    .name(a.getName())
-                    .price(a.getPrice())
-                    .maxParticipant(a.getMaxParticipant())
-                    .ageLimit(a.getAgeLimit())
-                    .build()).collect(Collectors.toList());
+        if(includeAll) {
+            this.activity = reservation.getActivity();
+            this.customer = reservation.getCustomer();
         }
     }
 }

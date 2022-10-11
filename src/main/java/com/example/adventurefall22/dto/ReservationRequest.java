@@ -1,7 +1,7 @@
 package com.example.adventurefall22.dto;
 
-
 import com.example.adventurefall22.entity.Activity;
+import com.example.adventurefall22.entity.Customer;
 import com.example.adventurefall22.entity.Reservation;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -15,44 +15,20 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class ReservationRequest {
 
+    private int resId;
 
-    private String contactName;
+    private Activity activity;
 
-    private String email;
-
-    private int phoneNumber;
-
-    private int age;
-
-    private int numberOfParticipants;
-
-    private List<Activity> activityList;
+    private Customer customer;
 
     private LocalDate date;
 
-    private String companyName;
-    private int cvr;
+    private int numberOfParticipants;
 
-
-    public static Reservation getReservationEntity(ReservationRequest rr) {
-        return new Reservation(rr.contactName, rr.email, rr.phoneNumber, rr.age,
-                 rr.date, rr.companyName, rr.cvr);
-    }
-
-    public ReservationRequest(Reservation reservation) {
-        this.contactName = reservation.getContactName();
-        this.email = reservation.getEmail();
-        this.phoneNumber = reservation.getPhoneNumber();
-        this.age = reservation.getAge();
-        this.date = reservation.getDate();
-        this.companyName = reservation.getCompanyName();
-        this.cvr = reservation.getCvr();
-    }
 }
