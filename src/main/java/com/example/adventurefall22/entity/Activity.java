@@ -3,6 +3,7 @@ package com.example.adventurefall22.entity;
 import lombok.*;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,7 +23,9 @@ public class Activity {
     private String name;
 
     private int ageLimit;
+
     private int maxParticipant;
+
     private int price;
 
     @ManyToOne
