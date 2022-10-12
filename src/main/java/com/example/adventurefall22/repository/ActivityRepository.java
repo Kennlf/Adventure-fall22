@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.time.LocalDate;
 
-public interface ActivityRepository extends JpaRepository<Activity, Integer> {
+public interface ActivityRepository extends JpaRepository<Activity, String> {
 
-    public boolean existsByIdAndReservationDate(int activityId, LocalDate reservationDate);
+    public boolean existsByNameAndReservation_Date(String activityId, LocalDate reservationDate);
 }

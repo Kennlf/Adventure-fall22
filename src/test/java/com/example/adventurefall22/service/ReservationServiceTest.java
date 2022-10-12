@@ -1,7 +1,11 @@
 package com.example.adventurefall22.service;
 
 import com.example.adventurefall22.dto.ReservationResponse;
+import com.example.adventurefall22.entity.Activity;
+import com.example.adventurefall22.entity.Customer;
 import com.example.adventurefall22.entity.Reservation;
+import com.example.adventurefall22.repository.ActivityRepository;
+import com.example.adventurefall22.repository.CustomerRepository;
 import com.example.adventurefall22.repository.ReservationRepository;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -21,16 +25,29 @@ import static org.junit.jupiter.api.Assertions.*;
 @DataJpaTest
 class ReservationServiceTest {
 
-   /* public ReservationService reservationService;
+    public ReservationService reservationService;
 
     public static ReservationRepository reservationRepository;
+    public static CustomerRepository customerRepository;
+    public static ActivityRepository activityRepository;
 
     @BeforeAll
-    public static void setupData(@Autowired ReservationRepository reservation_Repository){
+    public static void setupData(@Autowired ReservationRepository reservation_Repository, @Autowired CustomerRepository customer_Repository,@Autowired ActivityRepository activity_Repository){
         reservationRepository = reservation_Repository;
+        customerRepository = customer_Repository;
+        activityRepository = activity_Repository;
+
+        customerRepository.deleteAll();
+        activityRepository.deleteAll();
+
+        Activity a1 = new Activity("paintball", 100, "Ed");
+        Activity a2 = new Activity("minigolf", 500, "Eddy");
+        Customer c1 = new Customer(11223344, "John Doe", "email@mail.dk");
+        Customer c2 = new Customer(55667788, "Jane Doe", "email@mail.com");
         List<Reservation> reservations = List.of(
-                new Reservation("John doe", "John@john.dk",88888888,15, LocalDate.of(2022, 10,10),null,12345678),
-                new Reservation("AA", "A@A.dk",11111111,10, LocalDate.of(2022, 10,15),null,87654321)
+                new Reservation(a1, c1, LocalDate.of(2022, 10,10),3),
+                new Reservation(a2, c2, LocalDate.of(2023, 10,10),3)
+
         );
         reservationRepository.saveAll(reservations);
 
@@ -38,9 +55,17 @@ class ReservationServiceTest {
 
     @BeforeEach
     public void setReservationService(){
-        reservationService = new ReservationService(reservationRepository);
+        reservationService = new ReservationService(reservationRepository, activityRepository, customerRepository);
     }
 
+    @Test
+    void reserveActivity() {
+        reservationService.reserveActivity("paintball", 11223344, LocalDate.of(2022, 12, 10), 5);
+        List<ReservationResponse> responses = reservationService.getAllReservations();
+        assertEquals(3, responses.size());
+    }
+
+    /*
     @Test
     void getAllReservations() {
         List<ReservationResponse> responses = reservationService.getAllReservations();

@@ -1,8 +1,11 @@
 package com.example.adventurefall22.api;
 
 
+import com.example.adventurefall22.dto.CustomerRequest;
 import com.example.adventurefall22.dto.ReservationRequest;
 import com.example.adventurefall22.dto.ReservationResponse;
+import com.example.adventurefall22.entity.Customer;
+import com.example.adventurefall22.service.CustomerService;
 import com.example.adventurefall22.service.ReservationService;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,7 +17,7 @@ import java.util.List;
 public class ReservationController {
 
     ReservationService reservationService;
-
+    CustomerService customerService;
 
     public ReservationController(ReservationService reservationService) {
         this.reservationService = reservationService;
@@ -38,6 +41,7 @@ public class ReservationController {
 
     @PostMapping()
     public void makeReservation(@RequestBody ReservationRequest request){
-        //reservationService.reserveActivity();
+        customerService.makeCustomer(request.getCustomer());
+        reservationService.reserveActivity(request.getActivity().getName(), request.getCustomer().getPhoneNumber(), request.getDate(), request.getNumberOfParticipants() );
     }
 }

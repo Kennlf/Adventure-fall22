@@ -1,6 +1,5 @@
 package com.example.adventurefall22.entity;
 
-
 import lombok.*;
 
 
@@ -9,7 +8,6 @@ import java.sql.Time;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-
 
 @Getter
 @Setter
@@ -24,14 +22,20 @@ public class Reservation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Activity activity;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    private Customer customer;
 
     private LocalDate date;
 
-    @ManyToOne
-    private Customer customer;
-
     private int numberOfParticipants;
 
+    public Reservation(Activity activity, Customer customer, LocalDate date, int numberOfParticipants) {
+        this.activity = activity;
+        this.date = date;
+        this.customer = customer;
+        this.numberOfParticipants = numberOfParticipants;
+    }
 }

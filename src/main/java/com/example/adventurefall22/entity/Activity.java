@@ -14,11 +14,18 @@ import javax.persistence.*;
 public class Activity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String name;
 
     private int price;
 
     private String instructorName;
 
+    @OneToOne(mappedBy = "activity", cascade = CascadeType.ALL)
+    private Reservation reservation;
+
+    public Activity(String name, int price, String instructorName) {
+        this.name = name;
+        this.price = price;
+        this.instructorName = instructorName;
+    }
 }

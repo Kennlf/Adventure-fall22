@@ -2,8 +2,10 @@ package com.example.adventurefall22.service;
 
 import com.example.adventurefall22.dto.ReservationResponse;
 import com.example.adventurefall22.entity.Activity;
+import com.example.adventurefall22.entity.Customer;
 import com.example.adventurefall22.entity.Reservation;
 import com.example.adventurefall22.repository.ActivityRepository;
+import com.example.adventurefall22.repository.CustomerRepository;
 import com.example.adventurefall22.repository.ReservationRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -18,9 +20,12 @@ public class ReservationService {
 
     ReservationRepository reservationRepository;
     ActivityRepository activityRepository;
+    CustomerRepository customerRepository;
 
-    public ReservationService(ReservationRepository reservationRepository) {
+    public ReservationService(ReservationRepository reservationRepository, ActivityRepository activityRepository, CustomerRepository customerRepository) {
         this.reservationRepository = reservationRepository;
+        this.activityRepository = activityRepository;
+        this.customerRepository = customerRepository;
     }
 
     public List<ReservationResponse> getAllReservations() {
@@ -39,14 +44,20 @@ public class ReservationService {
         reservationRepository.deleteById(id);
     }
 
-    public void reserveActivity(int id, LocalDate date, Reservation res) {
+    public void reserveActivity(String activityId, int phoneNumber, LocalDate date, int numberOfParticipants) {
+
+       if(activityRepository.existsByNameAndReservation_Date(activityId, date)) {
+           throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Activity already booked");
+
+       }
+       Activity activity = activityRepository.findById(activityId)
+                .orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND));
+
+        Customer customer = customerRepository.findById(phoneNumber)
+                .orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND));
 
 
-        if(activityRepository.existsByIdAndReservationDate(id, date)){
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Activity already booked");
-        }
-
-        Reservation reservation = new Reservation();
+        Reservation reservation = new Reservation(activity, customer, date, numberOfParticipants);
         reservationRepository.save(reservation);
     }
 }

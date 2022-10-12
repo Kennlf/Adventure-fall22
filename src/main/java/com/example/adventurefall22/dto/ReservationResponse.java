@@ -37,11 +37,11 @@ public class ReservationResponse {
 
     private Customer customer;
 
-
-
     public ReservationResponse(Reservation reservation, Boolean includeAll) {
         this.resId = reservation.getId();
+        this.customer = reservation.getCustomer();
         this.contactName = customer.getName();
+        this.activity = reservation.getActivity();
         this.activityName = activity.getName();
         this.instructorName = activity.getInstructorName();
         this.date = reservation.getDate();
