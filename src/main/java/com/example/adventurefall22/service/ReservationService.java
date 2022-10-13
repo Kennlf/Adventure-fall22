@@ -44,7 +44,7 @@ public class ReservationService {
         reservationRepository.deleteById(id);
     }
 
-    public void reserveActivity(String activityId, int phoneNumber, LocalDate date, int numberOfParticipants) {
+    public ReservationResponse reserveActivity(String activityId, int phoneNumber, LocalDate date, int numberOfParticipants) {
 
        if(activityRepository.existsByNameAndReservation_Date(activityId, date)) {
            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Activity already booked");
@@ -59,5 +59,6 @@ public class ReservationService {
 
         Reservation reservation = new Reservation(activity, customer, date, numberOfParticipants);
         reservationRepository.save(reservation);
+        return new ReservationResponse(reservation, false);
     }
 }

@@ -40,8 +40,9 @@ public class ReservationController {
     }
 
     @PostMapping()
-    public void makeReservation(@RequestBody ReservationRequest request){
+    public ReservationResponse makeReservation(@RequestBody ReservationRequest request){
         customerService.makeCustomer(request.getCustomer());
-        reservationService.reserveActivity(request.getActivity().getName(), request.getCustomer().getPhoneNumber(), request.getDate(), request.getNumberOfParticipants() );
+        return reservationService.reserveActivity(request.getActivity().getName(), request.getCustomer().getPhoneNumber(), request.getDate(), request.getNumberOfParticipants());
+
     }
 }
