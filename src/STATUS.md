@@ -1,3 +1,12 @@
+Link to backend repo	https://github.com/Kennlf/Adventure-fall22-backend
+
+Link to frontend repo	https://github.com/Kennlf/Adventure-fall22-frontend
+
+Link to deployed backend	https://adventure-fall22.azurewebsites.net
+(Backend index virker ikke - "/api/reservations" virker men der er ikke noget i databasen)
+
+Link to deployed frontend	https://witty-hill-0afee6f03.2.azurestaticapps.net
+
 **STATUS** 
 _Programmering:_ 
 Vi er kommet relativt lang med frontend-delen af projektet. 
